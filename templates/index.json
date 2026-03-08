@@ -27,20 +27,6 @@
       },
       "block_order": ["badge_1", "badge_2", "badge_3"]
     },
-    "press-logos": {
-      "type": "press-logos",
-      "settings": {
-        "title": "As Featured In"
-      },
-      "blocks": {
-        "logo_1": { "type": "logo", "settings": { "name": "Forbes" } },
-        "logo_2": { "type": "logo", "settings": { "name": "Good Housekeeping" } },
-        "logo_3": { "type": "logo", "settings": { "name": "Sleep Foundation" } },
-        "logo_4": { "type": "logo", "settings": { "name": "Wirecutter" } },
-        "logo_5": { "type": "logo", "settings": { "name": "Business Insider" } }
-      },
-      "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5"]
-    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -138,33 +124,11 @@
         "title": "Built for Better Sleep"
       }
     },
-    "quiz": {
-      "type": "quiz-banner",
-      "settings": {
-        "title": "Not Sure Which Mattress Is Right for You?",
-        "description": "Take our 2-minute sleep quiz and we'll recommend the perfect mattress based on your sleep style, body type, and preferences.",
-        "step_1": "Answer a few questions",
-        "step_2": "Get your match",
-        "step_3": "Sleep better tonight",
-        "button_text": "Take the Sleep Quiz"
-      }
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
         "subtitle": "Reviews",
         "title": "What Our Sleepers Say"
-      }
-    },
-    "promo": {
-      "type": "promo-bar",
-      "settings": {
-        "eyebrow": "Limited Time Offer",
-        "title": "Save $200 on Any Mattress",
-        "description": "Use code SLEEP200 at checkout. Offer ends soon!",
-        "show_countdown": true,
-        "countdown_date": "2026-04-01",
-        "button_text": "Shop the Sale"
       }
     },
     "faq": {
@@ -217,14 +181,11 @@
   },
   "order": [
     "hero",
-    "press-logos",
     "featured-collection",
     "image-with-text",
     "comparison",
     "features",
-    "quiz",
     "testimonials",
-    "promo",
     "faq"
   ]
 }
