@@ -1,0 +1,166 @@
+<section class="image-with-text section-padding {% if section.settings.reverse_layout %}image-with-text--reversed{% endif %} {% if section.settings.bg_color == 'white' %}bg-white{% endif %}" data-animate>
+  <div class="container">
+    <div class="iwt-grid">
+      <div class="iwt-image">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+            width="800"
+            height="600"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="iwt-placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="iwt-content">
+        {% if section.settings.subtitle != blank %}
+          <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="iwt-title">{{ section.settings.title }}</h2>
+        <div class="iwt-text">{{ section.settings.text }}</div>
+        {% if section.settings.stats_enabled %}
+          <div class="iwt-stats">
+            {% for block in section.blocks %}
+              {% if block.type == 'stat' %}
+                <div class="iwt-stat" {{ block.shopify_attributes }}>
+                  <span class="iwt-stat-number" data-count="{{ block.settings.number }}">{{ block.settings.number }}{{ block.settings.suffix }}</span>
+                  <span class="iwt-stat-label">{{ block.settings.label }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_url }}" class="btn btn-primary btn-lg">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with Text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Crafted for Your Best Sleep"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We started with a simple mission: everyone deserves a great night's sleep without breaking the bank. Our mattresses are designed by sleep scientists and built with premium materials, shipped directly to your door.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Reverse layout (image on right)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stats_enabled",
+      "label": "Show stats",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "50000"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (e.g. +, %, K)",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy Sleepers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "50000",
+            "suffix": "+",
+            "label": "Happy Sleepers"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4.8",
+            "suffix": "/5",
+            "label": "Average Rating"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "suffix": " Yr",
+            "label": "Warranty"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

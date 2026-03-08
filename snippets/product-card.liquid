@@ -13,13 +13,46 @@
         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
       {% if product.compare_at_price > product.price %}
-        <span class="product-card-badge sale-badge">Sale</span>
+        <span class="product-card-badge sale-badge">
+          Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+        </span>
       {% endif %}
+      <div class="product-card-overlay">
+        <span class="btn btn-white btn-sm">Quick View</span>
+      </div>
     </div>
     <div class="product-card-info">
+      {% if product.metafields.reviews.rating.value %}
+        <div class="product-card-rating">
+          <div class="rating-stars">
+            {% assign rating = product.metafields.reviews.rating.value | round %}
+            {% for i in (1..5) %}
+              {% if i <= rating %}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFC107" stroke="#FFC107" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              {% else %}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if product.metafields.reviews.rating_count %}
+            <span class="rating-count">({{ product.metafields.reviews.rating_count }})</span>
+          {% endif %}
+        </div>
+      {% endif %}
       <h3 class="product-card-title">{{ product.title }}</h3>
       {% if product.metafields.custom.short_description %}
         <p class="product-card-desc">{{ product.metafields.custom.short_description }}</p>
+      {% endif %}
+      {% if product.metafields.custom.firmness %}
+        <div class="product-card-firmness">
+          <span class="firmness-text">Firmness:</span>
+          <div class="firmness-scale-mini">
+            <div class="firmness-bar-mini">
+              <div class="firmness-fill-mini" style="width: {{ product.metafields.custom.firmness | times: 10 }}%"></div>
+            </div>
+            <span class="firmness-value">{{ product.metafields.custom.firmness_label | default: 'Medium' }}</span>
+          </div>
+        </div>
       {% endif %}
       <div class="product-card-price">
         {% if product.compare_at_price > product.price %}
@@ -27,7 +60,7 @@
         {% endif %}
         <span class="price-current">From {{ product.price | money }}</span>
       </div>
-      <span class="btn btn-secondary">View Details</span>
+      <span class="btn btn-secondary">Shop Now</span>
     </div>
   </a>
 </div>

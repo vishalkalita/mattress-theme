@@ -1,14 +1,19 @@
 <section class="hero-banner" style="{% if section.settings.image != blank %}background-image: url('{{ section.settings.image | image_url: width: 1920 }}');{% endif %}">
+  {% if section.settings.video_url != blank %}
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="{{ section.settings.video_url }}" type="video/mp4">
+    </video>
+  {% endif %}
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     {% if section.settings.subtitle != blank %}
-      <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+      <p class="hero-subtitle" data-hero-animate>{{ section.settings.subtitle }}</p>
     {% endif %}
-    <h1 class="hero-title">{{ section.settings.title }}</h1>
-    <p class="hero-description">{{ section.settings.description }}</p>
-    <div class="hero-actions">
+    <h1 class="hero-title" data-hero-animate>{{ section.settings.title }}</h1>
+    <p class="hero-description" data-hero-animate>{{ section.settings.description }}</p>
+    <div class="hero-actions" data-hero-animate>
       {% if section.settings.button_text != blank %}
-        <a href="{{ section.settings.button_url }}" class="btn btn-primary btn-lg">
+        <a href="{{ section.settings.button_url }}" class="btn btn-accent btn-lg">
           {{ section.settings.button_text }}
         </a>
       {% endif %}
@@ -18,20 +23,37 @@
         </a>
       {% endif %}
     </div>
-    <div class="hero-trust-badges">
-      <div class="trust-badge">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
-        <span>Free Shipping</span>
-      </div>
-      <div class="trust-badge">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
-        <span>100-Night Trial</span>
-      </div>
-      <div class="trust-badge">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
-        <span>10-Year Warranty</span>
-      </div>
+    <div class="hero-trust-badges" data-hero-animate>
+      {% for block in section.blocks %}
+        {% if block.type == 'trust_badge' %}
+          <div class="trust-badge" {{ block.shopify_attributes }}>
+            {% if block.settings.icon == 'shipping' %}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            {% elsif block.settings.icon == 'trial' %}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            {% elsif block.settings.icon == 'warranty' %}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            {% else %}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+            {% endif %}
+            <span>{{ block.settings.text }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
+
+    {% if section.settings.show_rating %}
+      <div class="hero-social-proof" data-hero-animate>
+        <div class="hero-rating">
+          <div class="hero-stars">
+            {% for i in (1..5) %}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFC107" stroke="#FFC107" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {% endfor %}
+          </div>
+          <span class="hero-rating-text">{{ section.settings.rating_text }}</span>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -43,6 +65,12 @@
       "type": "image_picker",
       "id": "image",
       "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4)",
+      "info": "Optional. Add a direct link to an MP4 video for background video."
     },
     {
       "type": "text",
@@ -83,11 +111,63 @@
       "type": "url",
       "id": "button_url_2",
       "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating social proof",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Rated 4.8/5 by 10,000+ sleepers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping truck" },
+            { "value": "trial", "label": "Moon (trial)" },
+            { "value": "warranty", "label": "Shield (warranty)" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Hero Banner"
+      "name": "Hero Banner",
+      "blocks": [
+        {
+          "type": "trust_badge",
+          "settings": { "icon": "shipping", "text": "Free Shipping" }
+        },
+        {
+          "type": "trust_badge",
+          "settings": { "icon": "trial", "text": "100-Night Trial" }
+        },
+        {
+          "type": "trust_badge",
+          "settings": { "icon": "warranty", "text": "10-Year Warranty" }
+        }
+      ]
     }
   ]
 }

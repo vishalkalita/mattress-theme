@@ -1,0 +1,135 @@
+<section class="faq-section section-padding" data-animate>
+  <div class="container container-narrow">
+    <div class="section-header">
+      {% if section.settings.subtitle != blank %}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-question" data-accordion-trigger>
+            <span>{{ block.settings.question }}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="accordion-content" data-accordion-content>
+            <div class="faq-answer">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank %}
+      <div class="faq-cta">
+        <p>{{ section.settings.cta_text }}</p>
+        {% if section.settings.cta_button_text != blank %}
+          <a href="{{ section.settings.cta_button_url }}" class="btn btn-outline">{{ section.settings.cta_button_text }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Bottom CTA text",
+      "default": "Still have questions? We're here to help."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA button text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How does the 100-night trial work?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Try your new mattress for 100 nights in the comfort of your own home. If you're not completely satisfied, we'll arrange a free pickup and give you a full refund. No questions asked.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "How does the 100-night trial work?",
+            "answer": "<p>Try your new mattress for 100 nights in the comfort of your own home. If you're not completely satisfied, we'll arrange a free pickup and give you a full refund. No questions asked.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What firmness level should I choose?",
+            "answer": "<p>It depends on your sleep position. Side sleepers generally prefer medium-soft, back sleepers do well with medium-firm, and stomach sleepers typically prefer firm. Our sleep quiz can help you find the perfect match.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How is the mattress delivered?",
+            "answer": "<p>Your mattress is compressed, rolled, and shipped in a box directly to your door. Free shipping typically takes 3-7 business days. Simply unbox, unroll, and let it expand for 24-48 hours.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer financing?",
+            "answer": "<p>Yes! We partner with Affirm to offer 0% APR financing for qualifying customers. You can split your purchase into easy monthly payments at checkout.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What does the warranty cover?",
+            "answer": "<p>Our 10-year warranty covers manufacturing defects including sagging greater than 1 inch, broken or cracked foam, and physical flaws in the mattress that cause it to split or crack despite normal usage.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
