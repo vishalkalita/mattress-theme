@@ -3,13 +3,13 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "subtitle": "Award-Winning Comfort",
-        "title": "Sleep Like Never Before",
-        "description": "Discover our premium mattresses crafted with innovative materials for the perfect balance of comfort and support.",
+        "subtitle": "SmartComfort Technology",
+        "title": "Experience the Future of Sleep",
+        "description": "Patented adaptive grid technology that adjusts to your body, delivering perfect support and breathability all night long.",
         "button_text": "Shop Mattresses",
         "button_text_2": "Take the Sleep Quiz",
         "show_rating": true,
-        "rating_text": "Rated 4.8/5 by 10,000+ sleepers"
+        "rating_text": "Rated 4.9/5 by 50,000+ sleepers"
       },
       "blocks": {
         "badge_1": {
@@ -31,7 +31,7 @@
       "type": "featured-collection",
       "settings": {
         "subtitle": "Our Collection",
-        "title": "Find Your Perfect Mattress",
+        "title": "Choose Your Perfect Mattress",
         "products_to_show": 3,
         "show_view_all": true
       }
@@ -39,9 +39,9 @@
     "image-with-text": {
       "type": "image-with-text",
       "settings": {
-        "subtitle": "Our Story",
-        "title": "Crafted for Your Best Sleep",
-        "text": "<p>We started with a simple mission: everyone deserves a great night's sleep without breaking the bank. Our mattresses are designed by sleep scientists and built with premium materials, shipped directly to your door.</p>",
+        "subtitle": "Our Technology",
+        "title": "Engineered for Perfect Sleep",
+        "text": "<p>Our innovative sleep technology uses a patented adaptive grid structure that intelligently responds to your body's pressure points. Unlike traditional foam, our SmartComfort grid flexes where you need softness and supports where you need firmness — delivering a personalized sleep experience every single night.</p>",
         "reverse_layout": false,
         "stats_enabled": true,
         "bg_color": "default",
@@ -67,7 +67,7 @@
       "type": "comparison-table",
       "settings": {
         "subtitle": "Compare",
-        "title": "Find Your Perfect Match",
+        "title": "Compare Our Mattresses",
         "description": "Not sure which mattress is right for you? Compare our top models side by side."
       },
       "blocks": {
@@ -120,22 +120,22 @@
     "features": {
       "type": "features-grid",
       "settings": {
-        "subtitle": "Why Choose Us",
-        "title": "Built for Better Sleep"
+        "subtitle": "The Science of Sleep",
+        "title": "Why Our Technology Wins"
       }
     },
     "testimonials": {
       "type": "testimonials",
       "settings": {
         "subtitle": "Reviews",
-        "title": "What Our Sleepers Say"
+        "title": "Loved by 50,000+ Sleepers"
       }
     },
     "faq": {
       "type": "faq",
       "settings": {
         "subtitle": "FAQ",
-        "title": "Frequently Asked Questions",
+        "title": "Got Questions? We've Got Answers",
         "cta_text": "Still have questions? We're here to help.",
         "cta_button_text": "Contact Us"
       },

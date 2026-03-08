@@ -62,6 +62,11 @@
         </svg>
         <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
       </a>
+      {% if section.settings.show_header_cta %}
+        <a href="{{ section.settings.header_cta_url }}" class="header-cta btn btn-accent btn-sm">
+          {{ section.settings.header_cta_text | default: 'Shop Now' }}
+        </a>
+      {% endif %}
       <button class="mobile-menu-toggle" data-menu-toggle aria-label="Menu">
         <span class="hamburger"></span>
       </button>
@@ -83,6 +88,23 @@
       "id": "menu",
       "label": "Navigation menu",
       "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header_cta",
+      "label": "Show header CTA button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "header_cta_text",
+      "label": "Header CTA text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "header_cta_url",
+      "label": "Header CTA link"
     }
   ]
 }

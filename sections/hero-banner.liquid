@@ -5,13 +5,15 @@
     </video>
   {% endif %}
   <div class="hero-overlay"></div>
-  <div class="container hero-content">
+  <div class="container hero-content" style="text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
     {% if section.settings.subtitle != blank %}
-      <p class="hero-subtitle" data-hero-animate>{{ section.settings.subtitle }}</p>
+      <div class="hero-tech-badge" data-hero-animate>
+        <span class="tech-badge-pill">{{ section.settings.subtitle }}</span>
+      </div>
     {% endif %}
     <h1 class="hero-title" data-hero-animate>{{ section.settings.title }}</h1>
     <p class="hero-description" data-hero-animate>{{ section.settings.description }}</p>
-    <div class="hero-actions" data-hero-animate>
+    <div class="hero-actions" data-hero-animate style="justify-content: center;">
       {% if section.settings.button_text != blank %}
         <a href="{{ section.settings.button_url }}" class="btn btn-accent btn-lg">
           {{ section.settings.button_text }}
@@ -23,7 +25,7 @@
         </a>
       {% endif %}
     </div>
-    <div class="hero-trust-badges" data-hero-animate>
+    <div class="hero-trust-badges" data-hero-animate style="justify-content: center;">
       {% for block in section.blocks %}
         {% if block.type == 'trust_badge' %}
           <div class="trust-badge" {{ block.shopify_attributes }}>

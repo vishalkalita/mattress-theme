@@ -1,10 +1,10 @@
 {
   "current": {
-    "color_primary": "#1B365D",
-    "color_secondary": "#6B8EAE",
-    "color_accent": "#D4A574",
-    "color_background": "#FAFAF8",
-    "color_text": "#2C2C2C",
+    "color_primary": "#0A1628",
+    "color_secondary": "#2563EB",
+    "color_accent": "#FF6B35",
+    "color_background": "#F8FAFC",
+    "color_text": "#1E293B",
     "show_announcement": true,
     "announcement_text": "Free Shipping & 100-Night Trial on All Mattresses"
   }
