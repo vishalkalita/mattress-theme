@@ -1,0 +1,132 @@
+<section class="features-grid section-padding">
+  <div class="container">
+    <div class="section-header">
+      {% if section.settings.subtitle != blank %}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="features-list">
+      {% for block in section.blocks %}
+        <div class="feature-item" {{ block.shopify_attributes }}>
+          {% if block.settings.icon == 'cooling' %}
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"></path></svg>
+            </div>
+          {% elsif block.settings.icon == 'support' %}
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+            </div>
+          {% elsif block.settings.icon == 'eco' %}
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10 0-4.1-2.468-7.625-6-9.168A10.002 10.002 0 0 0 2 12c0 5.523 4.477 10 10 10z"></path><path d="M8 14s1.5 2 4 2 4-2 4-2"></path></svg>
+            </div>
+          {% elsif block.settings.icon == 'warranty' %}
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+          {% else %}
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"></path></svg>
+            </div>
+          {% endif %}
+          <h3 class="feature-title">{{ block.settings.title }}</h3>
+          <p class="feature-description">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Built for Better Sleep"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "cooling", "label": "Cooling" },
+            { "value": "support", "label": "Support" },
+            { "value": "eco", "label": "Eco-Friendly" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe this feature and how it benefits the customer."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Grid",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "cooling",
+            "title": "Advanced Cooling",
+            "description": "Our breathable foam technology keeps you cool all night long."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "Zoned Support",
+            "description": "Targeted support where you need it most for proper spinal alignment."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "eco",
+            "title": "Eco-Friendly Materials",
+            "description": "CertiPUR-US certified foams free from harmful chemicals."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "warranty",
+            "title": "10-Year Warranty",
+            "description": "Sleep with confidence knowing your mattress is built to last."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

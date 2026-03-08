@@ -1,0 +1,94 @@
+<section class="hero-banner" style="{% if section.settings.image != blank %}background-image: url('{{ section.settings.image | image_url: width: 1920 }}');{% endif %}">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    {% if section.settings.subtitle != blank %}
+      <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    <h1 class="hero-title">{{ section.settings.title }}</h1>
+    <p class="hero-description">{{ section.settings.description }}</p>
+    <div class="hero-actions">
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn btn-primary btn-lg">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+      {% if section.settings.button_text_2 != blank %}
+        <a href="{{ section.settings.button_url_2 }}" class="btn btn-outline btn-lg">
+          {{ section.settings.button_text_2 }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="hero-trust-badges">
+      <div class="trust-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+        <span>Free Shipping</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+        <span>100-Night Trial</span>
+      </div>
+      <div class="trust-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+        <span>10-Year Warranty</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Award-Winning Comfort"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Sleep Like Never Before"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover our premium mattresses crafted with innovative materials for the perfect balance of comfort and support."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Primary button text",
+      "default": "Shop Mattresses"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Secondary button text",
+      "default": "Take the Sleep Quiz"
+    },
+    {
+      "type": "url",
+      "id": "button_url_2",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

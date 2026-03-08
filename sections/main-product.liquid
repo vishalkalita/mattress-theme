@@ -1,0 +1,173 @@
+<section class="product-page section-padding">
+  <div class="container">
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="product-main-image">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="800"
+              height="800"
+              id="product-main-img"
+            >
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="product-thumbnails">
+            {% for image in product.images %}
+              <button
+                class="product-thumbnail {% if forloop.first %}active{% endif %}"
+                data-image-url="{{ image | image_url: width: 800 }}"
+                data-thumbnail
+              >
+                <img
+                  src="{{ image | image_url: width: 150 }}"
+                  alt="{{ image.alt | escape }}"
+                  width="150"
+                  height="150"
+                  loading="lazy"
+                >
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        <div class="product-info-header">
+          {% if product.metafields.custom.badge %}
+            <span class="product-badge">{{ product.metafields.custom.badge }}</span>
+          {% endif %}
+          <h1 class="product-title">{{ product.title }}</h1>
+          <div class="product-price">
+            {% if product.compare_at_price > product.price %}
+              <span class="price-compare">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="price-current">{{ product.price | money }}</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="price-save">
+                Save {{ product.compare_at_price | minus: product.price | money }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+
+        {% form 'product', product %}
+          {% for option in product.options_with_values %}
+            <div class="product-option">
+              <label class="option-label">{{ option.name }}</label>
+              <div class="option-values">
+                {% for value in option.values %}
+                  <label class="option-value {% if option.selected_value == value %}selected{% endif %}">
+                    <input
+                      type="radio"
+                      name="{{ option.name }}"
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                      data-option-selector
+                    >
+                    <span class="option-value-label">{{ value }}</span>
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+
+          <select name="id" class="product-variant-select visually-hidden" data-variant-select>
+            {% for variant in product.variants %}
+              <option
+                value="{{ variant.id }}"
+                {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+                data-price="{{ variant.price }}"
+              >
+                {{ variant.title }} - {{ variant.price | money }}
+              </option>
+            {% endfor %}
+          </select>
+
+          <div class="product-add-to-cart">
+            <div class="quantity-selector">
+              <button type="button" class="qty-btn" data-qty-minus aria-label="Decrease quantity">-</button>
+              <input type="number" name="quantity" value="1" min="1" class="qty-input" data-qty-input>
+              <button type="button" class="qty-btn" data-qty-plus aria-label="Increase quantity">+</button>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg btn-add-to-cart"
+              {% unless product.available %}disabled{% endunless %}
+            >
+              {% if product.available %}
+                Add to Cart
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+          </div>
+        {% endform %}
+
+        <div class="product-trust">
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span>Free Shipping</span>
+          </div>
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <span>100-Night Trial</span>
+          </div>
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>10-Year Warranty</span>
+          </div>
+        </div>
+
+        <div class="product-description">
+          <div class="accordion" data-accordion>
+            <div class="accordion-item">
+              <button class="accordion-trigger active" data-accordion-trigger>
+                <span>Description</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="accordion-content open" data-accordion-content>
+                {{ product.description }}
+              </div>
+            </div>
+            {% if product.metafields.custom.materials %}
+              <div class="accordion-item">
+                <button class="accordion-trigger" data-accordion-trigger>
+                  <span>Materials & Construction</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content" data-accordion-content>
+                  {{ product.metafields.custom.materials }}
+                </div>
+              </div>
+            {% endif %}
+            {% if product.metafields.custom.shipping_info %}
+              <div class="accordion-item">
+                <button class="accordion-trigger" data-accordion-trigger>
+                  <span>Shipping & Returns</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content" data-accordion-content>
+                  {{ product.metafields.custom.shipping_info }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

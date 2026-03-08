@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "subtitle": "Award-Winning Comfort",
+        "title": "Sleep Like Never Before",
+        "description": "Discover our premium mattresses crafted with innovative materials for the perfect balance of comfort and support.",
+        "button_text": "Shop Mattresses",
+        "button_text_2": "Take the Sleep Quiz"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "Our Collection",
+        "title": "Find Your Perfect Mattress",
+        "products_to_show": 3,
+        "show_view_all": true
+      }
+    },
+    "features": {
+      "type": "features-grid",
+      "settings": {
+        "subtitle": "Why Choose Us",
+        "title": "Built for Better Sleep"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "subtitle": "Reviews",
+        "title": "What Our Sleepers Say"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection",
+    "features",
+    "testimonials"
+  ]
+}

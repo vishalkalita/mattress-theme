@@ -1,0 +1,119 @@
+<section class="testimonials section-padding">
+  <div class="container">
+    <div class="section-header">
+      {% if section.settings.subtitle != blank %}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="testimonials-slider" data-testimonials>
+      {% for block in section.blocks %}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-stars">
+            {% for i in (1..block.settings.rating) %}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4A574" stroke="#D4A574" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {% endfor %}
+          </div>
+          <blockquote class="testimonial-text">
+            "{{ block.settings.text }}"
+          </blockquote>
+          <div class="testimonial-author">
+            <strong>{{ block.settings.author }}</strong>
+            {% if block.settings.product_name != blank %}
+              <span class="testimonial-product">{{ block.settings.product_name }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What Our Sleepers Say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "Best mattress I've ever slept on. The support is incredible and I wake up feeling refreshed every morning."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product purchased",
+          "default": "DreamCloud Hybrid"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Best mattress I've ever slept on. The support is incredible and I wake up feeling refreshed every morning.",
+            "author": "Sarah M.",
+            "product_name": "CloudRest Hybrid"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I was skeptical about buying a mattress online, but the 100-night trial made it easy. I'm never going back to my old mattress.",
+            "author": "James K.",
+            "product_name": "DreamFoam Original"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "My back pain has significantly improved since switching to this mattress. Worth every penny!",
+            "author": "Linda R.",
+            "product_name": "OrthoSupport Firm"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
